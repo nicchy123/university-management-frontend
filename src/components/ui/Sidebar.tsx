@@ -2,9 +2,9 @@
 import { Layout, Menu,  theme } from "antd";
 import React from "react";
 import { sidebarItems } from "@/constants/sidebarItems";
-import { USER_ROLE } from "@/constants/role";
+import { getUserInfo } from "@/services/auth.service.";
 const Sidebar = () => {
-  const role = USER_ROLE.STUDENT;
+  const { role } = getUserInfo() as any;
   const { Sider } = Layout;
   const {
     token: { colorBgContainer },
