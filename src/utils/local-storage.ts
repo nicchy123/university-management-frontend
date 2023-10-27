@@ -1,20 +1,17 @@
 import { authKey } from "@/constants/storageKey";
 
-export const setToLocastorage = (key: string, value: string)=>{
-    if(!key || typeof window === "undefined") return ""
-    return localStorage.setItem(key, value)
-}
+export const setToLocastorage = (key: string, value: string) => {
+  if (!key || typeof window === "undefined") return "";
+  const item = localStorage.setItem(key, value);
+  return item;
+};
 
 export const getFromLocastorage = (key: string) => {
-    //  if (!key || typeof window === "undefined") {
-    //    return "";
-    //  }
-  return localStorage.getItem(key);
+  const item = localStorage.getItem(key);
+  return item;
 };
 
 export const removeFromLocastorage = () => {
-     
-  return localStorage.removeItem(authKey);;
+  const item = localStorage.removeItem(authKey);
+  return item;
 };
-
- 

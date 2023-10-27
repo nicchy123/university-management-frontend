@@ -13,7 +13,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     if (!userLoggedin) router.push("/login");
     setLoading(true);
-  }, [router, loading]);
+  }, [router, loading, userLoggedin]);
   if (!setLoading) {
     return <Spin />;
   }
