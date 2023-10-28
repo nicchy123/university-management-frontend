@@ -1,9 +1,11 @@
+import { getUserInfo } from '@/services/auth.service.';
 import { removeFromLocastorage } from '@/utils/local-storage';
 import  {Button, Dropdown, Layout,  Row}  from 'antd';
 const { Header: AntHeaders } = Layout;
 import type { MenuProps } from "antd";
 import { useRouter } from 'next/navigation';
 const Headers = () => {
+  const {role}  = getUserInfo() as any;
   const router = useRouter()
     const handleLogout = ()=>{
       removeFromLocastorage();
@@ -20,8 +22,9 @@ const Headers = () => {
       },
     ];
     return (
-      <AntHeaders style={{display:"flex", justifyContent:"end", alignItems:"center"}}>
+      <AntHeaders style={{display:"flex", justifyContent:"end", margin:"0px", alignItems:"center"}}>
         <Row>
+            <Button style={{marginRight:"10px"}}>{role}</Button>
           <Dropdown menu={{ items }} placement="bottomRight" arrow>
             <Button>Profile</Button>
           </Dropdown>

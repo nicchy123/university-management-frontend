@@ -16,7 +16,7 @@ const Sidebar = () => {
         width={280}
         style={{ background: colorBgContainer, minHeight: "100vh" }}
       >
-        <div style={{display:"flex", justifyContent:"center", margin:"30px 0", fontSize:"20px", fontWeight:"900"}}>PH UM</div>
+        <div style={{display:"flex", justifyContent:"center", fontSize:"20px", fontWeight:"900"}}>PH UM</div>
         <Menu
           mode="inline"
           defaultSelectedKeys={["1"]}
