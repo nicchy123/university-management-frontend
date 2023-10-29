@@ -1,15 +1,24 @@
-import ActionBar from '@/components/ui/ActionBar';
-import Link from 'next/link';
-import React from 'react';
+import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
+import { Button } from "antd";
+import Link from "next/link";
 
-const ManageFaculty = () => {
-    return (
-      <div>
-        <ActionBar title="Faculty List">
-          <Link href={"/super-admin/faculty/create"}></Link>
-        </ActionBar>
-      </div>
-    );
+const ManageFacultyPage = () => {
+  return (
+    <div>
+      <UMBreadCrumb
+        items={[
+          {
+            label: "super_admin",
+            link: "/super_admin",
+          },
+        ]}
+      />
+      <h1>Faculty List</h1>
+      <Link href="/super_admin/manage-faculty/create">
+        <Button type="primary">Create</Button>
+      </Link>
+    </div>
+  );
 };
 
-export default ManageFaculty;
+export default ManageFacultyPage;
