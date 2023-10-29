@@ -1,3 +1,4 @@
+"use client"
 import { authKey } from "@/constants/storageKey";
 import { decodeToken } from "@/utils/jwt";
 import { setToLocastorage, getFromLocastorage } from "@/utils/local-storage";

@@ -1,3 +1,4 @@
+"use client"
 import { getUserInfo } from '@/services/auth.service.';
 import { removeFromLocastorage } from '@/utils/local-storage';
 import  {Button, Dropdown, Layout,  Row}  from 'antd';
