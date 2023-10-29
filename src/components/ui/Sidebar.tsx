@@ -1,7 +1,7 @@
 "use client";
-import { Layout, Menu,  theme } from "antd";
+import { Layout, Menu, theme } from "antd";
 import React from "react";
-import { sidebarItems } from "@/constants/sidebarItems";
+import { sidebarItems } from "@/components/ui/sidebarItems";
 import { getUserInfo } from "@/services/auth.service.";
 const Sidebar = () => {
   const { role } = getUserInfo() as any;
@@ -16,7 +16,16 @@ const Sidebar = () => {
         width={280}
         style={{ background: colorBgContainer, minHeight: "100vh" }}
       >
-        <div style={{display:"flex", justifyContent:"center", fontSize:"20px", fontWeight:"900"}}>PH UM</div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            fontSize: "20px",
+            fontWeight: "900",
+          }}
+        >
+          PH UM
+        </div>
         <Menu
           mode="inline"
           defaultSelectedKeys={["1"]}

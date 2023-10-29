@@ -9,7 +9,7 @@ import {
   FileTextOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
-import { USER_ROLE } from "./role";
+import { USER_ROLE } from "../../constants/role";
 export const sidebarItems = (role: string) => {
   const defaultSidebarItems: MenuProps["items"] = [
     {

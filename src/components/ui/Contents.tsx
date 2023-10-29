@@ -14,8 +14,7 @@ const Contents = ({ children }: { children: React.ReactNode }) => {
       }}
     >
       <Headers />
-      
-      {children}
+      <div style={{ margin: "10px 50px" }}>{children}</div>
     </Content>
   );
 };

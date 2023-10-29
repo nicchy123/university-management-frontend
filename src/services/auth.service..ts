@@ -1,14 +1,14 @@
-"use client"
+"use client";
 import { authKey } from "@/constants/storageKey";
 import { decodeToken } from "@/utils/jwt";
-import { setToLocastorage, getFromLocastorage } from "@/utils/local-storage";
+import { setToLocalstorage, getFromLocalstorage } from "@/utils/local-storage";
 
 const storeUserInfo = (accesToken: string) => {
-  return setToLocastorage(authKey, accesToken);
+  return setToLocalstorage(authKey, accesToken);
 };
 
 export const getUserInfo = () => {
-  const authToken = getFromLocastorage(authKey);
+  const authToken = getFromLocalstorage(authKey);
   if (authToken) {
     const decoded = decodeToken(authToken);
     return decoded;
@@ -17,9 +17,9 @@ export const getUserInfo = () => {
   }
 };
 
-export const isLoggedIn = ()=>{
-    const authToken = getFromLocastorage(authKey);
-    return !!authToken;
-}
+export const isLoggedIn = () => {
+  const authToken = getFromLocalstorage(authKey);
+  return !!authToken;
+};
 
 export default storeUserInfo;
