@@ -1,20 +1,13 @@
-"use client";
-import { authKey } from "@/constants/storageKey";
-
-export const setToLocalstorage = (key: string, value: string) => {
+export const setToLocalStorage = (key: string, token: string) => {
   if (!key || typeof window === "undefined") {
     return "";
   }
-  return localStorage.setItem(key, value);
+  return localStorage.setItem(key, token);
 };
 
-export const getFromLocalstorage = (key: string) => {
+export const getFromLocalStorage = (key: string) => {
   if (!key || typeof window === "undefined") {
-    return;
+    return "";
   }
   return localStorage.getItem(key);
-};
-
-export const removeFromLocalstorage = (authKey) => {
-  return localStorage.removeItem(authKey);
 };

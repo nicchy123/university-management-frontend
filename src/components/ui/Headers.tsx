@@ -2,15 +2,14 @@ import { Avatar, Button, Dropdown, Layout, MenuProps, Row, Space } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { authKey } from "@/constants/storageKey";
 import { useRouter } from "next/navigation";
-import { removeFromLocalstorage } from "@/utils/local-storage";
-import { getUserInfo } from "@/services/auth.service.";
+import { getUserInfo, removeUserInfo } from "@/services/auth.service.";
 const { Header: AntHeader } = Layout;
 
 const Header = () => {
   const router = useRouter();
 
   const logOut = () => {
-    removeFromLocalstorage(authKey);
+    removeUserInfo(authKey);
     router.push("/login");
   };
 

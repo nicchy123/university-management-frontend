@@ -1,11 +1,19 @@
-import React from 'react';
+import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 
-const AdminUser = () => {
-    return (
-        <div>
-            admin user
-        </div>
-    );
+const ManageUsersPage = () => {
+  return (
+    <div>
+      <UMBreadCrumb
+        items={[
+          {
+            label: "super_admin",
+            link: "/super_admin",
+          },
+        ]}
+      />
+      <h1>User List</h1>
+    </div>
+  );
 };
 
-export default AdminUser;
+export default ManageUsersPage;
