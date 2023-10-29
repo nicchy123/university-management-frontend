@@ -18,9 +18,7 @@ const FormInput = ({
   type,
   size,
   value,
-  id,
   placeholder,
-  validation,
   label,
 }: IInput) => {
   const { control } = useFormContext();

@@ -1,7 +1,6 @@
 "use client";
 
-
-import { getFromLocalstorage, setToLocalstorage } from "@/utils/local-storage";
+import { getFromLocalStorage, setToLocalStorage } from "@/utils/local-storage";
 import { Button, message, Steps } from "antd";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -22,13 +21,13 @@ const StepperForm = ({ steps, submitHandler, navigateLink }: IStepsProps) => {
   const router = useRouter();
 
   const [current, setCurrent] = useState<number>(
-    !!getFromLocalstorage("step")
-      ? Number(JSON.parse(getFromLocalstorage("step") as string).step)
+    !!getFromLocalStorage("step")
+      ? Number(JSON.parse(getFromLocalStorage("step") as string).step)
       : 0
   );
 
   useEffect(() => {
-    setToLocalstorage("step", JSON.stringify({ step: current }));
+    setToLocalStorage("step", JSON.stringify({ step: current }));
   }, [current]);
 
   const next = () => {
@@ -48,7 +47,7 @@ const StepperForm = ({ steps, submitHandler, navigateLink }: IStepsProps) => {
   const handleStudentOnSubmit = (data: any) => {
     submitHandler(data);
     reset();
-    setToLocalstorage("step", JSON.stringify({ step: 0 }));
+    setToLocalStorage("step", JSON.stringify({ step: 0 }));
     navigateLink && router.push(navigateLink);
   };
 
