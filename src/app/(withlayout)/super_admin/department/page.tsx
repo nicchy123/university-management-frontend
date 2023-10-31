@@ -1,44 +1,51 @@
-"use client"
+"use client";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import UMTable from "@/components/ui/UMtable";
+import { useDepartmentsQuery } from "@/redux/api/departmentApi";
 import { Button } from "antd";
 import Link from "next/link";
+import { useState } from "react";
 
 const ManageDepartmentPage = () => {
-    const columns = [
-      {
-        title: "Name",
-        dataIndex: "name",
-        key: "name",
+  const query: Record<string, any> = {};
+  const [size, setSize] = useState<number>(10);
+  const [page, setPage] = useState<number>(1);
+  query.size = size;
+  query.page = page;
+  const { data, isLoading } = useDepartmentsQuery({ ...query });
+  const departments = data?.departments;
+  const meta = data?.meta;
+  const columns = [
+    {
+      title: "title",
+      dataIndex: "title",
+    },
+    {
+      title: "createdAt",
+      dataIndex: "createdAt",
+      key: "createdAt",
+      sorter: true
+    },
+    {
+      title: "Action",
+      render: function (data: any) {
+        return (
+          <Button onClick={() => console.log(data)} type="primary" danger>
+            X
+          </Button>
+        );
       },
-      {
-        title: "Age",
-        dataIndex: "age",
-        key: "age",
-        // @ts-ignore
-        sorter: (a: number, b: number) => a.age - b.age,
-      },
-      {
-        title: "Action",
-        render: function (data: any) {
-          return (
-            <Button onClick={() => console.log(data)} type="primary" danger>
-              X
-            </Button>
-          );
-        },
-      },
-    ];
-    const departments = [
-      { name: "nasir", age: "10" },
-      { name: "nasir", age: "20" },
-    ];
-    const onPaginationChange = (page: number, pageSize: number) => {
-      console.log("Page:", page, "PageSize:", pageSize);
-    };
-    const onTableChange = (pagination: any, filter: any, sorter: any) => {
-      const { order, field } = sorter;
-    };
+    },
+  ];
+
+  const onPaginationChange = (page: number, pageSize: number) => {
+    setSize(pageSize);
+    setPage(page);
+    console.log("Page:", page, "PageSize:", pageSize);
+  };
+  const onTableChange = (pagination: any, filter: any, sorter: any) => {
+    const { order, field } = sorter;
+  };
   return (
     <div>
       <UMBreadCrumb
@@ -62,11 +69,11 @@ const ManageDepartmentPage = () => {
         </Link>
       </div>
       <UMTable
-        loading={false}
+        loading={isLoading}
         columns={columns}
         dataSource={departments}
-        pageSize={10}
-        totalPages={100}
+        pageSize={size}
+        totalPages={meta?.total}
         showSizeChanger={true}
         onPaginationChange={onPaginationChange}
         onTableChange={onTableChange}

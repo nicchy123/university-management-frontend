@@ -1,5 +1,4 @@
 "use client";
-
 import Form from "@/components/forms/form";
 import FormInput from "@/components/forms/formInput";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
@@ -11,12 +10,11 @@ const CreateDepartmentPage = () => {
   const onSubmit = async (data: any) => {
     message.loading("creating new department")
     try {
-      console.log(data);
+      
      await createDepartment(data)
      message.success("department created")
     } catch (err: any) {
       message.error(err.message)
-      console.error(err.message);
     }
   };
   const base = "super_admin";
