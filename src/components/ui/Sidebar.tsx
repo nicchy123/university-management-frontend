@@ -22,6 +22,7 @@ const Sidebar = () => {
             justifyContent: "center",
             fontSize: "20px",
             fontWeight: "900",
+            margin:"50px 0px"
           }}
         >
           PH UM

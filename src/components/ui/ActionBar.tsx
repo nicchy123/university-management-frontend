@@ -5,10 +5,18 @@ type ActionBarProps = {
     children: React.ReactElement | React.ReactNode 
 }
 const ActionBar = ({ title, children }: ActionBarProps) => {
-  return <div>
-    <h1>{title}</h1>
-    <div>{children}</div>
-  </div>;
+  return (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+      }}
+    >
+      <h1>{title}</h1>
+     {children}
+    </div>
+  );
 };
 
 export default ActionBar;
