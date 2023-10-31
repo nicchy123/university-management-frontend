@@ -1,20 +1,22 @@
 "use client";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import UMTable from "@/components/ui/UMtable";
-import { useDepartmentsQuery } from "@/redux/api/departmentApi";
+import { useDeleteDepartmentMutation, useDepartmentsQuery } from "@/redux/api/departmentApi";
 import { Button, Input } from "antd";
 import Link from "next/link";
 import { useState } from "react";
 import {
   DeleteOutlined,
   EditOutlined,
-  EyeOutlined,
   ReloadOutlined,
 } from "@ant-design/icons";
 import ActionBar from "@/components/ui/ActionBar";
+import { useDebounced } from "@/redux/hooks";
+import dayjs from 'dayjs'
+
 const ManageDepartmentPage = () => {
   const query: Record<string, any> = {};
-  const [size, setSize] = useState<number>(10);
+  const [size, setSize] = useState<number>(5);
   const [page, setPage] = useState<number>(1);
   const [sortBy, setsortBy] = useState<string>("");
   const [sortOrder, setsortOrder] = useState<string>("");
@@ -27,6 +29,8 @@ const ManageDepartmentPage = () => {
   const { data, isLoading } = useDepartmentsQuery({ ...query });
   const departments = data?.departments;
   const meta = data?.meta;
+  const [deleteDepartment] = useDeleteDepartmentMutation();
+
   const columns = [
     {
       title: "title",
@@ -35,6 +39,9 @@ const ManageDepartmentPage = () => {
     {
       title: "createdAt",
       dataIndex: "createdAt",
+      render: function (data: any){
+        return data && dayjs(data).format("MMM D, YYYY hh:mm A")
+      },
       sorter: true,
     },
     {
@@ -42,18 +49,21 @@ const ManageDepartmentPage = () => {
       render: function (data: any) {
         return (
           <>
-            <Button onClick={() => console.log(data)} type="primary" danger>
-              <EyeOutlined />
-            </Button>
+            <Link href={`/super_admin/department/edit/${data?._id}`}>
+              <Button
+                style={{ margin: "0px 10px" }}
+                onClick={() => console.log(data)}
+                type="primary"
+                danger
+              >
+                <EditOutlined />
+              </Button>
+            </Link>
             <Button
-              style={{ margin: "0px 10px" }}
-              onClick={() => console.log(data)}
+              onClick={() => deleteDepartment(data?._id)}
               type="primary"
               danger
             >
-              <EditOutlined />
-            </Button>
-            <Button onClick={() => console.log(data)} type="primary" danger>
               <DeleteOutlined />
             </Button>
           </>
@@ -61,11 +71,17 @@ const ManageDepartmentPage = () => {
       },
     },
   ];
-
-  const onPaginationChange = (page: number, pageSize: number) => {
-    setSize(pageSize);
-    setPage(page);
-  };
+  const debouncedTerm = useDebounced({
+    searchQuery: searchTerm,
+    delay: 600
+  }) 
+  if (!!debouncedTerm){
+     query.searchTerm = debouncedTerm;
+  }
+    const onPaginationChange = (page: number, pageSize: number) => {
+      setSize(pageSize);
+      setPage(page);
+    };
   const onTableChange = (pagination: any, filter: any, sorter: any) => {
     const { order, field } = sorter;
     setsortBy(field as string);
