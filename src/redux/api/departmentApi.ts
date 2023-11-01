@@ -5,26 +5,11 @@ const DEPARTMENT_URL = "/management-departments";
 
 export const departmentApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    createDepartment: build.mutation({
-      query: (loginData) => ({
-        url: `${DEPARTMENT_URL}/create-department`,
-        method: "POST",
-        data: loginData,
-      }),
-      invalidatesTags: ["department"],
-    }),
-    deleteDepartment: build.mutation({
-      query: (id) => ({
-        url: `${DEPARTMENT_URL}/${id}`,
-        method: "DELETE",
-      }),
-      invalidatesTags: ["department"],
-    }),
     departments: build.query({
       query: (arg: Record<string, any>) => ({
-        url: `${DEPARTMENT_URL}`,
+        url: DEPARTMENT_URL,
         method: "GET",
-        params: arg, 
+        params: arg,
       }),
       transformResponse: (response: IDepartment, meta: Imeta) => {
         return {
@@ -34,8 +19,50 @@ export const departmentApi = baseApi.injectEndpoints({
       },
       providesTags: ["department"],
     }),
+
+    addDepartment: build.mutation({
+      query: (data) => ({
+        url: DEPARTMENT_URL,
+        method: "POST",
+        data,
+      }),
+      invalidatesTags: ["department"],
+    }),
+
+    // get single department by id
+    department: build.query({
+      query: (id) => ({
+        url: `${DEPARTMENT_URL}/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["department"],
+    }),
+
+    // update single department by id
+    updateDepartment: build.mutation({
+      query: (data) => ({
+        url: `${DEPARTMENT_URL}/${data.id}`,
+        method: "PATCH",
+        data: data.body,
+      }),
+      invalidatesTags: ["department"],
+    }),
+
+    // delete single department by id
+    deleteDepartment: build.mutation({
+      query: (id) => ({
+        url: `${DEPARTMENT_URL}/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["department"],
+    }),
   }),
 });
 
-export const { useCreateDepartmentMutation, useDepartmentsQuery, useDeleteDepartmentMutation } =
-  departmentApi;
+export const {
+  useDepartmentsQuery,
+  useAddDepartmentMutation,
+  useDepartmentQuery, // get single department hooks
+  useUpdateDepartmentMutation, // update single department hooks
+  useDeleteDepartmentMutation, // delete single department hooks
+} = departmentApi;

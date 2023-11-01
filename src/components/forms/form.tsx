@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactElement, ReactNode } from "react";
+import { ReactElement, ReactNode, useEffect } from "react";
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 
 type FormConfig = {
@@ -24,8 +24,8 @@ const Form = ({
   if (!!defaultValues) formConfig["defaultValues"] = defaultValues;
   if (!!resolver) formConfig["resolver"] = resolver;
   const methods = useForm<FormProps>(formConfig);
-
   const { handleSubmit, reset } = methods;
+  useEffect(() => reset(defaultValues), [defaultValues, reset, methods]);
 
   const onSubmit = (data: any) => {
     submitHandler(data);
