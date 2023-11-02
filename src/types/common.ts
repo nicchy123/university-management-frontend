@@ -1,4 +1,3 @@
-import { type } from "os"
 
 export interface Imeta{
     limit: number,
@@ -27,4 +26,26 @@ export type IDepartment = {
     createdAt: string;
     updatedAt: string;
     _v: string;
+}
+export interface Name {
+  firstName: string;
+  lastName: string;
+  middleName: string;
+}
+export interface IAdmin {
+  id: string;
+  name: Name;
+  gender: string;
+  managementDepartment: string;
+  email: string;
+  contactNo: string;
+  emergencyContactNo: string;
+  dateOfBirth: string;
+  bloodGroup: string;
+  designation: string;
+  presentAddress: string;
+  permanentAddress: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
 }
