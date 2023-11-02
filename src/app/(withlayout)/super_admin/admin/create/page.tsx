@@ -8,19 +8,30 @@ import FormSelectField from "@/components/forms/formSelectField";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import UploadImage from "@/components/ui/uploadIMage";
 import { bloodGroupOptions, genderOptions } from "@/constants/global";
+import { useAddAdminWithFormDataMutation } from "@/redux/api/adminApi";
 import { useDepartmentsQuery } from "@/redux/api/departmentApi";
 import { adminSchema } from "@/schema/admin";
 import { IDepartment } from "@/types";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Button, Col, Row } from "antd";
+import { Button, Col, Row, message } from "antd";
 const CreateAdminPage = () => {
-  const onSubmit = async (data: any) => {
-    try {
-      console.log(data);
-    } catch (err: any) {
-      console.error(err.message);
-    }
-  };
+    const [addAdminWithFormData] = useAddAdminWithFormDataMutation();
+   const onSubmit = async (values: any) => {
+     const obj = { ...values };
+     const file = obj["file"];
+     delete obj["file"];
+     const data = JSON.stringify(obj);
+     const formData = new FormData();
+     formData.append("file", file as Blob);
+     formData.append("data", data);
+     message.loading("Creating...");
+     try {
+       await addAdminWithFormData(formData);
+       message.success("Admin created successfully!");
+     } catch (err: any) {
+       console.error(err.message);
+     }
+   };
   const { data } = useDepartmentsQuery({ limit: 100, page: 1 });
   // @ts-ignore
   const departments: IDepartment[] = data?.departments;
