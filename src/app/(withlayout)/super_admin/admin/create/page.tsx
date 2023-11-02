@@ -7,17 +7,12 @@ import FormInput from "@/components/forms/formInput";
 import FormSelectField from "@/components/forms/formSelectField";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import UploadImage from "@/components/ui/uploadIMage";
-import {
-  bloodGroupOptions,
-  departmentOptions,
-  genderOptions,
-} from "@/constants/global";
+import { bloodGroupOptions, genderOptions } from "@/constants/global";
+import { useDepartmentsQuery } from "@/redux/api/departmentApi";
 import { adminSchema } from "@/schema/admin";
-
+import { IDepartment } from "@/types";
 import { yupResolver } from "@hookform/resolvers/yup";
-
 import { Button, Col, Row } from "antd";
-
 const CreateAdminPage = () => {
   const onSubmit = async (data: any) => {
     try {
@@ -26,7 +21,15 @@ const CreateAdminPage = () => {
       console.error(err.message);
     }
   };
-
+  const { data } = useDepartmentsQuery({ limit: 100, page: 1 });
+  // @ts-ignore
+  const departments: IDepartment[] = data?.departments;
+  const departmentOptions = departments?.map((department) => {
+    return {
+      label: department?.title,
+      value: department?.id,
+    };
+  });
   return (
     <div>
       <UMBreadCrumb
@@ -155,7 +158,7 @@ const CreateAdminPage = () => {
                   marginBottom: "10px",
                 }}
               >
-                <UploadImage />
+                <UploadImage name="file"/>
               </Col>
             </Row>
           </div>
