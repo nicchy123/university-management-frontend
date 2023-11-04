@@ -1,20 +1,22 @@
-import React from "react";
-
 type ActionBarProps = {
-    title: string,
-    children: React.ReactElement | React.ReactNode 
-}
+  title?: string;
+  children?: React.ReactElement | React.ReactNode;
+};
+
 const ActionBar = ({ title, children }: ActionBarProps) => {
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-      }}
-    >
+    <div>
       <h1>{title}</h1>
-     {children}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          margin: "10px 0px",
+        }}
+      >
+        {children}
+      </div>
     </div>
   );
 };

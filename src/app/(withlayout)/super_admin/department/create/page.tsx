@@ -8,6 +8,7 @@ import { Button, Col, Row, message } from "antd";
 const CreateDepartmentPage = () => {
   const [addDepartment] = useAddDepartmentMutation();
   const onSubmit = async (data: any) => {
+    console.log(data);
     message.loading("creating new department")
     try {
       

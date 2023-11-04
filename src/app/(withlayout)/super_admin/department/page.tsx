@@ -104,29 +104,32 @@ const ManageDepartmentPage = () => {
       />
 
       <ActionBar title="Department List">
+        <Input
+          type="text"
+          size="large"
+          placeholder="Search..."
+          style={{
+            width: "20%",
+          }}
+          onChange={(e) => {
+            setseatchTerm(e.target.value);
+          }}
+        />
         <div>
           <Link href="/super_admin/department/create">
             <Button type="primary">Create</Button>
           </Link>
-
-          {!!sortBy ||
-            !!sortOrder ||
-            (!!searchTerm && (
-              <Button
-                onClick={resetFielters}
-                style={{ marginLeft: "20px" }}
-                type="primary"
-              >
-                <ReloadOutlined />
-              </Button>
-            ))}
+          {(!!sortBy || !!sortOrder || !!searchTerm) && (
+            <Button
+              onClick={resetFielters}
+              type="primary"
+              style={{ margin: "0px 5px" }}
+            >
+              <ReloadOutlined />
+            </Button>
+          )}
         </div>
       </ActionBar>
-      <Input
-        onChange={(e) => setseatchTerm(e.target.value)}
-        placeholder="Search"
-        style={{ marginBottom: "10px", width: "40%" }}
-      />
       <UMTable
         loading={isLoading}
         columns={columns}

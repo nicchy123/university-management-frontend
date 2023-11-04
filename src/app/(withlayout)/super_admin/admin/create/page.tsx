@@ -1,5 +1,4 @@
 "use client";
-
 import Form from "@/components/forms/form";
 import FormDatePicker from "@/components/forms/FormDatePicker";
 import FormInput from "@/components/forms/formInput";
@@ -13,7 +12,6 @@ import { useDepartmentsQuery } from "@/redux/api/departmentApi";
 import { adminSchema } from "@/schema/admin";
 import { IDepartment } from "@/types";
 import { yupResolver } from "@hookform/resolvers/yup";
-
 import { Button, Col, Row, message } from "antd";
 
 const CreateAdminPage = () => {

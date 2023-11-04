@@ -23,7 +23,7 @@ export const departmentApi = baseApi.injectEndpoints({
 
     addDepartment: build.mutation({
       query: (data) => ({
-        url: DEPARTMENT_URL,
+        url: `${DEPARTMENT_URL}/create-department`,
         method: "POST",
         data,
       }),
