@@ -2,16 +2,16 @@
 import Form from "@/components/forms/form";
 import FormInput from "@/components/forms/formInput";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
-import { useCreateDepartmentMutation } from "@/redux/api/departmentApi";
+import { useAddDepartmentMutation } from "@/redux/api/departmentApi";
 import { Button, Col, Row, message } from "antd";
 
 const CreateDepartmentPage = () => {
-  const [createDepartment] = useCreateDepartmentMutation();
+  const [addDepartment] = useAddDepartmentMutation();
   const onSubmit = async (data: any) => {
     message.loading("creating new department")
     try {
       
-     await createDepartment(data)
+     await addDepartment(data);
      message.success("department created")
     } catch (err: any) {
       message.error(err.message)

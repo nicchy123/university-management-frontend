@@ -1,5 +1,6 @@
 import { IDepartment, Imeta } from "@/types";
 import { baseApi } from "./baseApi";
+import { tagTypes } from "../tag-types";
 
 const DEPARTMENT_URL = "/management-departments";
 
@@ -17,7 +18,7 @@ export const departmentApi = baseApi.injectEndpoints({
           meta,
         };
       },
-      providesTags: ["department"],
+      providesTags: [tagTypes.department],
     }),
 
     addDepartment: build.mutation({
@@ -26,7 +27,7 @@ export const departmentApi = baseApi.injectEndpoints({
         method: "POST",
         data,
       }),
-      invalidatesTags: ["department"],
+      invalidatesTags: [tagTypes.department],
     }),
 
     // get single department by id
@@ -35,7 +36,7 @@ export const departmentApi = baseApi.injectEndpoints({
         url: `${DEPARTMENT_URL}/${id}`,
         method: "GET",
       }),
-      providesTags: ["department"],
+      providesTags: [tagTypes.department],
     }),
 
     // update single department by id
@@ -45,7 +46,7 @@ export const departmentApi = baseApi.injectEndpoints({
         method: "PATCH",
         data: data.body,
       }),
-      invalidatesTags: ["department"],
+      invalidatesTags: [tagTypes.department],
     }),
 
     // delete single department by id
@@ -54,7 +55,7 @@ export const departmentApi = baseApi.injectEndpoints({
         url: `${DEPARTMENT_URL}/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["department"],
+      invalidatesTags: [tagTypes.department],
     }),
   }),
 });

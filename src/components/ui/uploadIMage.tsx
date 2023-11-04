@@ -12,17 +12,7 @@ const getBase64 = (img: RcFile, callback: (url: string) => void) => {
   reader.readAsDataURL(img);
 };
 
-const beforeUpload = (file: RcFile) => {
-  const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
-  if (!isJpgOrPng) {
-    message.error("You can only upload JPG/PNG file!");
-  }
-  const isLt2M = file.size / 1024 / 1024 < 2;
-  if (!isLt2M) {
-    message.error("Image must smaller than 2MB!");
-  }
-  return isJpgOrPng && isLt2M;
-};
+
 
 type ImageUploadProps = {
   name: string;
@@ -65,7 +55,6 @@ const UploadImage = ({ name }: ImageUploadProps) => {
         className="avatar-uploader"
         showUploadList={false}
         action="/api/file"
-        beforeUpload={beforeUpload}
         onChange={handleChange}
       >
         {imageUrl ? (
