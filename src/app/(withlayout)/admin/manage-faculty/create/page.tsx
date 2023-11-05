@@ -107,6 +107,7 @@ const CreateFacultyPage = () => {
               />
             </Col>
             <Col span={8} style={{ margin: "10px 0" }}>
+              {/* @ts-ignore */}
               <ACDepartmentIDField
                 name="faculty.academicDepartment"
                 label="Academic Department"
